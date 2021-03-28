@@ -1,4 +1,4 @@
-import pyside2
+import PySide2
 
 from database import *
 
