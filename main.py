@@ -21,9 +21,9 @@ for folder in watchlist:
 
     print(f'{len(files)} files total')
 
+def scan(folder):
+    print("Scanning folder")
+
 
 if __name__=="__main__":
-
-    db_conn()
-
-
+    pass
