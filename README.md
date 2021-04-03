@@ -12,6 +12,8 @@ I've only tested on windows, but written "everything" to work crossplatform with
 * Add tests
 
 
-#other
+#Database
 
-The database contains tables of each folder 
+Sqlite3 using sqlite-utils to read write data. 
+
+The database.db file (sqlite) contains tables of each folder that's indexed. 
