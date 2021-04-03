@@ -10,3 +10,8 @@ I've only tested on windows, but written "everything" to work crossplatform with
 * Refresh function
 * Add folders to "watchlist"
 * Add tests
+
+
+#other
+
+The database contains tables of each folder 
