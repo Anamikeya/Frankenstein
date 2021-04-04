@@ -7,7 +7,9 @@ import sqlite_utils as sql
 import sqlite3
 
 # Temporary folder location
-watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License")]
+watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
+             Path("Y:\Models"),Path("Y:\Footage"),Path("Y:\Other"),Path("Y:\HDRI"),Path("Y:\previews"),
+            Path("Y:\Sound FX"),Path("Y:\Textures")]
 folder = watchlist[0]
 
 l = init_logger('frankenstein')
@@ -70,8 +72,8 @@ def scan_folder_db(folder):
 
 
 if __name__ == "__main__":
-    #scan_all(watchlist)
-
+    scan_all(watchlist)
+    """
     folder=Path("Y:\Models")
 
     a=scan_folder_disk(folder)
@@ -85,3 +87,5 @@ if __name__ == "__main__":
 
     len(a)
     len(b)
+    
+    """
