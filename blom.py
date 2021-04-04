@@ -14,7 +14,7 @@ class timer:
     """
     from time import time
 
-    def __init__(self, format='min'):
+    def __init__(self, format='s'):
         self.start = self.time()
 
         if format == 'min' or format == 'm':
