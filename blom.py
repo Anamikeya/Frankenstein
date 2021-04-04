@@ -14,12 +14,13 @@ class timer:
     """
     from time import time
 
-    def __init__(self, format='s'):
+    def __init__(self, format='s', rounder=3):
         self.start = self.time()
+        self.rounder = rounder
 
         if format == 'min' or format == 'm':
             self._divider = 60
-            self._format_text='min'
+            self._format_text = 'min'
         elif format == 'sec' or format == 's':
             self._divider = 1
             self._format_text = 'sec'
@@ -29,9 +30,9 @@ class timer:
     def __str__(self):
         self.end = self.time()
 
-        self.duration = round((self.end - self.start) / self._divider, 2)
+        self.duration = round((self.end - self.start) / self._divider, self.rounder)
 
-        return str(self.duration)+' '+self._format_text
+        return str(self.duration) + ' ' + self._format_text
 
 
 def init_logger(name, lvlstream=logging.INFO, lvlfile=logging.DEBUG):

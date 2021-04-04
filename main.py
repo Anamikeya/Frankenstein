@@ -22,52 +22,66 @@ print(db.table_names())
 
 def scan_all(watchlist):
     l.info(f"Scanning all {len(watchlist)} folders in watchlist")
+    timer_scan_all_total=timer()
 
     allfiles = []
 
-    for folder in watchlist:
-        l.info(f"Scanning folder {folder}")
+    for i,folder in enumerate(watchlist):
+        l.info('#'*50)
+        l.info(f"Scanning folder {i} of {len(watchlist)}  {folder}")
         timer_scan = timer()
         files_folders = list(folder.rglob("*"))
         l.info(f"Found {len(files_folders)} files and folders total in {timer_scan}")
+
+        #l.info('TODO cleaning db if exists')
+
 
         l.info(f'Checking which is file and folder (can prob be optimized)')
         timer_filefolder = timer()
         files = [x for x in files_folders if x.is_file()]
         l.info(f'Found {len(files)} files')
         l.info(f'Found {len(files_folders) - len(files)} folders')
-        files_clean = [{'path': str(x)} for x in files_clean]
+        files_clean = [{'path': str(x)} for x in files]
         l.info(f'Took {timer_filefolder}')
 
 
         l.info('Writing to db')
         timer_db_write=timer()
-        db[str(folder)].insert_all({})
+        db[str(folder)].insert_all(files_clean)
         l.info(f'Took {timer_db_write}')
 
+    l.info(f'Total took {timer_scan_all_total}')
 
 
-def scan_old(folder):
-    scan_timer = timer(format='s')
-    l.info("Scanning folder")
+def scan_folder_disk(folder):
+    timer_scan_folder_disk = timer()
+    l.info(f'Scanning folder {str(folder)}')
+    files_folders = list(folder.rglob("*"))
+    l.info(f'Scan took {timer_scan_folder_disk}')
+    return files_folders
 
-    allfiles = []
-
-    for folder in watchlist:
-        files = list(folder.rglob("*"))
-        allfiles.extend(files)
-        # file=files[0]
-        # print(file.name)
-
-        for x in files:
-            l.info(str(x))
-
-    l.info(f'{len(allfiles)} files total in {scan_timer}')
-
-    return allfiles
+def scan_folder_db(folder):
+    timer_scan_folder_db = timer()
+    l.info(f'Scanning db for folder {str(folder)}')
+    files=list(db[str(folder)].rows_where(select="path"))
+    files_list = [x['path'] for x in files]
+    l.info(f'Scan took {timer_scan_folder_db}')
+    return files_list
 
 
 if __name__ == "__main__":
-    scan(folder)
+    #scan_all(watchlist)
 
-    pass
+    folder=Path("Y:\Models")
+
+    a=scan_folder_disk(folder)
+
+    #write a to db
+    files_clean = [{'path': str(x)} for x in a]
+    db[str(folder)].insert_all(files_clean)
+
+    b=scan_folder_db(folder)
+
+
+    len(a)
+    len(b)
