@@ -1,26 +1,37 @@
-#Blom Version 0.001
+# Blom Version 0.001
 
 import logging
 import sys
+
 
 class timer:
     """
     Returns min elapsed since created.
 
+    format='s','sec','min','m'
+
     Print using str(timer)
     """
     from time import time
 
-    def __init__(self):
+    def __init__(self, format='min'):
         self.start = self.time()
-        pass
+
+        if format == 'min' or format == 'm':
+            self._divider = 60
+            self._format_text='min'
+        elif format == 'sec' or format == 's':
+            self._divider = 1
+            self._format_text = 'sec'
+        else:
+            raise TypeError
 
     def __str__(self):
         self.end = self.time()
 
-        self.duration = round((self.end - self.start) / 60, 2)
+        self.duration = round((self.end - self.start) / self._divider, 2)
 
-        return str(self.duration)
+        return str(self.duration)+' '+self._format_text
 
 
 def init_logger(name, lvlstream=logging.INFO, lvlfile=logging.DEBUG):
