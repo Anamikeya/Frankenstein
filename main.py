@@ -6,37 +6,25 @@ from blom import init_logger, timer
 import sqlite_utils as sql
 import sqlite3
 
-# Temporary folder location
-watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
-             Path("Y:\Models"),Path("Y:\Footage"),Path("Y:\Other"),Path("Y:\HDRI"),Path("Y:\previews"),
-            Path("Y:\Sound FX"),Path("Y:\Textures")]
-folder = watchlist[0]
-
 l = init_logger('frankenstein')
-
 db = sql.Database('database.db')
+watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
+             Path("Y:\Models"), Path("Y:\Footage"), Path("Y:\Other"), Path("Y:\HDRI"), Path("Y:\previews"),
+             Path("Y:\Sound FX"), Path("Y:\Textures")]
 
-print(db.table_names())
-
-
-# get all data
-# list(db[str(folder)].rows)
 
 def scan_all(watchlist):
     l.info(f"Scanning all {len(watchlist)} folders in watchlist")
-    timer_scan_all_total=timer()
+    timer_scan_all_total = timer()
 
-    allfiles = []
-
-    for i,folder in enumerate(watchlist):
-        l.info('#'*50)
+    for i, folder in enumerate(watchlist):
+        l.info('#' * 50)
         l.info(f"Scanning folder {i} of {len(watchlist)}  {folder}")
         timer_scan = timer()
         files_folders = list(folder.rglob("*"))
         l.info(f"Found {len(files_folders)} files and folders total in {timer_scan}")
 
-        #l.info('TODO cleaning db if exists')
-
+        # l.info('TODO cleaning db if exists')
 
         l.info(f'Checking which is file and folder (can prob be optimized)')
         timer_filefolder = timer()
@@ -46,9 +34,8 @@ def scan_all(watchlist):
         files_clean = [{'path': str(x)} for x in files]
         l.info(f'Took {timer_filefolder}')
 
-
         l.info('Writing to db')
-        timer_db_write=timer()
+        timer_db_write = timer()
         db[str(folder)].insert_all(files_clean)
         l.info(f'Took {timer_db_write}')
 
@@ -62,17 +49,23 @@ def scan_folder_disk(folder):
     l.info(f'Scan took {timer_scan_folder_disk}')
     return files_folders
 
+
 def scan_folder_db(folder):
     timer_scan_folder_db = timer()
     l.info(f'Scanning db for folder {str(folder)}')
-    files=list(db[str(folder)].rows_where(select="path"))
+    files = list(db[str(folder)].rows_where(select="path"))
     files_list = [x['path'] for x in files]
     l.info(f'Scan took {timer_scan_folder_db}')
     return files_list
 
 
 if __name__ == "__main__":
-    scan_all(watchlist)
+    # Temporary folder location
+
+    path=[Path('/Users/blom/Pictures')]
+
+    scan_all(path)
+    #scan_all(watchlist)
     """
     folder=Path("Y:\Models")
 
