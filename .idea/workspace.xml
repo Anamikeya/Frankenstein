@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5d9776c1-e81c-4837-ad08-e60861dd8425" name="Default Changelist" comment="scan all" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1qOYIfvJDZDFtnKeBtRVLFkQpnY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein" />
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein\blom_sqldb" />
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein\blom\blom" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein\blom\blom" />
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein\blom_sqldb" />
+      <recent name="C:\Users\blom\PycharmProjects\Frankenstein" />
+      <recent name="C:\Users\blom\PycharmProjects\blom_sqldb" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="Frankenstein" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5d9776c1-e81c-4837-ad08-e60861dd8425" name="Default Changelist" comment="" />
+      <created>1616952025119</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616952025119</updated>
+    </task>
+    <task id="LOCAL-00001" summary="init">
+      <created>1616952465998</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1616952465998</updated>
+    </task>
+    <task id="LOCAL-00002" summary="working">
+      <created>1616952655504</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1616952655504</updated>
+    </task>
+    <task id="LOCAL-00003" summary="init">
+      <created>1616957090049</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1616957090049</updated>
+    </task>
+    <task id="LOCAL-00004" summary="db context manager">
+      <created>1616977611951</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1616977611951</updated>
+    </task>
+    <task id="LOCAL-00005" summary="helo">
+      <created>1616979354187</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1616979354187</updated>
+    </task>
+    <task id="LOCAL-00006" summary="testfile">
+      <created>1616980069709</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1616980069709</updated>
+    </task>
+    <task id="LOCAL-00007" summary="helo">
+      <created>1616980350256</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1616980350256</updated>
+    </task>
+    <task id="LOCAL-00008" summary="extras from totalrekoll like the LOGGER">
+      <created>1616980767141</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616980767141</updated>
+    </task>
+    <task id="LOCAL-00009" summary="updated logger">
+      <created>1616980940429</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1616980940429</updated>
+    </task>
+    <task id="LOCAL-00010" summary="okje">
+      <created>1617065926580</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617065926580</updated>
+    </task>
+    <task id="LOCAL-00011" summary="okje">
+      <created>1617218810069</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1617218810069</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added sqlite_utils">
+      <created>1617493111693</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1617493111693</updated>
+    </task>
+    <task id="LOCAL-00013" summary="db stuff">
+      <created>1617493197887</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1617493197887</updated>
+    </task>
+    <task id="LOCAL-00014" summary="logging in blom module">
+      <created>1617495380261</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1617495380261</updated>
+    </task>
+    <task id="LOCAL-00015" summary="more work">
+      <created>1617500053945</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1617500053945</updated>
+    </task>
+    <task id="LOCAL-00016" summary="insert all data to db">
+      <created>1617503080324</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1617503080324</updated>
+    </task>
+    <task id="LOCAL-00017" summary="scan_all func done">
+      <created>1617505157975</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1617505157975</updated>
+    </task>
+    <task id="LOCAL-00018" summary="scanning working&#10;writing to db working&#10;reading from db working">
+      <created>1617507512136</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1617507512136</updated>
+    </task>
+    <task id="LOCAL-00019" summary="scanning working&#10;writing to db working&#10;reading from db working">
+      <created>1617507793981</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1617507793981</updated>
+    </task>
+    <task id="LOCAL-00020" summary="scan all">
+      <created>1617507978183</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1617507978183</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/blom_sqldb" />
+      <path value="$PROJECT_DIR$/blom" />
+    </ignored-roots>
+    <MESSAGE value="working" />
+    <MESSAGE value="init" />
+    <MESSAGE value="db context manager" />
+    <MESSAGE value="testfile" />
+    <MESSAGE value="helo" />
+    <MESSAGE value="extras from totalrekoll like the LOGGER" />
+    <MESSAGE value="updated logger" />
+    <MESSAGE value="okje" />
+    <MESSAGE value="added sqlite_utils" />
+    <MESSAGE value="db stuff" />
+    <MESSAGE value="logging in blom module" />
+    <MESSAGE value="more work" />
+    <MESSAGE value="insert all data to db" />
+    <MESSAGE value="scan_all func done" />
+    <MESSAGE value="scanning working&#10;writing to db working&#10;reading from db working" />
+    <MESSAGE value="scan all" />
+    <option name="LAST_COMMIT_MESSAGE" value="scan all" />
+  </component>
+</project>
