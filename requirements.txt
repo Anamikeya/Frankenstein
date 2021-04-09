@@ -1,3 +1,3 @@
-pyside2
+pyside6
 numpy
 sqlite-utils

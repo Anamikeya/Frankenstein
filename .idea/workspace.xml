@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5d9776c1-e81c-4837-ad08-e60861dd8425" name="Default Changelist" comment="scan all" />
+    <list default="true" id="5d9776c1-e81c-4837-ad08-e60861dd8425" name="Default Changelist" comment="helo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -41,17 +43,17 @@
   </component>
   <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
-      <module name="Frankenstein" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\blom\PycharmProjects\Frankenstein\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
@@ -211,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617507978183</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="helo">
+      <created>1617974897735</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1617974897735</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -235,7 +244,6 @@
     <MESSAGE value="init" />
     <MESSAGE value="db context manager" />
     <MESSAGE value="testfile" />
-    <MESSAGE value="helo" />
     <MESSAGE value="extras from totalrekoll like the LOGGER" />
     <MESSAGE value="updated logger" />
     <MESSAGE value="okje" />
@@ -247,6 +255,7 @@
     <MESSAGE value="scan_all func done" />
     <MESSAGE value="scanning working&#10;writing to db working&#10;reading from db working" />
     <MESSAGE value="scan all" />
-    <option name="LAST_COMMIT_MESSAGE" value="scan all" />
+    <MESSAGE value="helo" />
+    <option name="LAST_COMMIT_MESSAGE" value="helo" />
   </component>
 </project>
