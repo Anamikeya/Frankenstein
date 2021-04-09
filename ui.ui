@@ -15,24 +15,19 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="2" column="1">
+    <item row="5" column="1">
      <widget class="QOpenGLWidget" name="openGLWidget"/>
     </item>
-    <item row="1" column="1">
-     <widget class="QGraphicsView" name="graphicsView"/>
+    <item row="2" column="1">
+     <widget class="QGraphicsView" name="image"/>
     </item>
-    <item row="1" column="0">
-     <widget class="QListWidget" name="watchlist">
-      <item>
+    <item row="5" column="0">
+     <widget class="QTreeWidget" name="filestree">
+      <column>
        <property name="text">
-        <string>fds</string>
+        <string notr="true">1</string>
        </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>New Item</string>
-       </property>
-      </item>
+      </column>
      </widget>
     </item>
     <item row="0" column="0">
@@ -42,16 +37,7 @@
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QTreeWidget" name="treeWidget">
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item row="3" column="0">
+    <item row="6" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
        <widget class="QPushButton" name="btn_refresh">
@@ -76,6 +62,48 @@
       </item>
      </layout>
     </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Watchlist</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0">
+     <widget class="QListWidget" name="watchlist">
+      <item>
+       <property name="text">
+        <string>fds</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>New Item</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Files</string>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QListWidget" name="fileslist">
+      <item>
+       <property name="text">
+        <string>fds</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>New Item</string>
+       </property>
+      </item>
+     </widget>
+    </item>
    </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -84,7 +112,7 @@
      <x>0</x>
      <y>0</y>
      <width>1228</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
