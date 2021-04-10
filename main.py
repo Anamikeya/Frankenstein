@@ -3,14 +3,17 @@ from datetime import datetime
 from PySide6 import QtCore, QtWidgets, QtGui
 from pathlib import Path
 import numpy as np
-from PySide6.QtGui import QIcon
+from PySide6.QtGui import QIcon, QPixmap
 
 from blom import init_logger, timer
 import sqlite_utils as sql
 import sys
 from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QTableWidget, QListWidgetItem, QLineEdit
-from PySide6.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication
+from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QTableWidget, QListWidgetItem, QLineEdit, \
+    QFileDialog
+from PySide6.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF, Slot
+
+from filepickertest import ImageViewer
 from ui_loader import load_ui
 
 
@@ -29,7 +32,32 @@ class MainWindow(QMainWindow):
         loader = QUiLoader()
         #loader.load('ui.ui', self)
         load_ui('ui.ui', self)
+        self._connectAll()
+        self._populate_watchlist()
 
+    def _connectAll(self):
+        self.btn_add_folder.clicked.connect(self.add_folder)
+
+    def _populate_watchlist(self):
+        items=scan_folder_db('watchlist')
+        self.watchlist.addItems(items)
+
+    def showImage(self):
+        image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"), self.tr("Images (*.jpg)"))
+        pixmap = QPixmap(image_path)
+        self.labelimage.setPixmap(pixmap)
+
+    def add_folder(self):
+        path=QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
+
+        if path:
+            clock = timer()
+            l.info(f'Adding {1} folder to watchlist')
+            db['watchlist'].insert_all([{'path':str(path)}])
+            l.info(f"Added {1} folder in {clock}")
+
+        else:
+            l.info('canceldd adding folder')
 
 def scan_all(watchlist):
     l.info(f"Scanning all {len(watchlist)} folders in watchlist")
@@ -76,16 +104,6 @@ def scan_folder_db(folder):
     l.info(f'Scan took {timer_scan_folder_db}')
     return files_list
 
-def watchlist_add(folders):
-    clock=timer()
-    l.info(f'adding folders {len(folders)} to watchlist')
-    #convert to string
-    strfolders=[str(x) for x in folders]
-
-    #insert to db
-    db['watchlist'].insert_all(strfolders)
-    l.info(f"Added {len(folders)} folders in {clock}")
-
 def watchlist_del():
     pass
 def watchlist_add():
@@ -103,8 +121,6 @@ if __name__ == "__main__":
 
     window = MainWindow()
 
-    window.watchlist.addItem("hej")
-    window.watchlist.addItems(["ett","två","tre"])
     #window.watchlist.addItems()
     #window = loadUi('ui.ui')
     window.show()
