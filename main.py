@@ -33,14 +33,33 @@ class MainWindow(QMainWindow):
         #loader.load('ui.ui', self)
         load_ui('ui.ui', self)
         self._connectAll()
-        self._populate_watchlist()
+        self.refresh_ui()
 
     def _connectAll(self):
-        self.btn_add_folder.clicked.connect(self.add_folder)
+        self.watch_add.clicked.connect(self.add_folder)
+        self.watch_refresh.clicked.connect(self.refresh_ui)
+        self.watch_remove.clicked.connect(self.removeSelected)
 
-    def _populate_watchlist(self):
-        items=scan_folder_db('watchlist')
+    def removeSelected(self):
+        #watchlist remove selected
+
+        selected=self.watchlist.selectedItems()[0].text()
+        l.info(selected)
+
+
+
+    def refresh_ui(self):
+        refresh_timer=timer()
+        l.info(f'Refreshing UI')
+
+        self.watchlist.clear()
+
+        items = scan_folder_db('watchlist')
         self.watchlist.addItems(items)
+
+        QCoreApplication.processEvents()
+        self.update()
+        l.info(f'Refreshed UI in {refresh_timer}')
 
     def showImage(self):
         image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"), self.tr("Images (*.jpg)"))
@@ -114,41 +133,7 @@ if __name__ == "__main__":
                  Path("Y:\Models"), Path("Y:\Footage"), Path("Y:\Other"), Path("Y:\HDRI"), Path("Y:\previews"),
                  Path("Y:\Sound FX"), Path("Y:\Textures")]
 
-    folder=Path('scan_folder_db("Y:\Models")')
-
-
     app = QApplication(sys.argv)
-
-    window = MainWindow()
-
-    #window.watchlist.addItems()
-    #window = loadUi('ui.ui')
-    window.show()
-
+    self = MainWindow()
+    self.show()
     sys.exit(app.exec_())
-
-    # Temporary folder location
-    """
-    path=[Path('/Users/blom/Pictures')]
-
-    scan_all(path)
-    
-    """
-
-    # scan_all(watchlist)
-    """
-    folder=Path("Y:\Models")
-
-    a=scan_folder_disk(folder)
-
-    #write a to db
-    files_clean = [{'path': str(x)} for x in a]
-    db[str(folder)].insert_all(files_clean)
-
-    b=scan_folder_db(folder)
-
-
-    len(a)
-    len(b)
-    
-    """

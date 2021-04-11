@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1228</width>
+    <width>1534</width>
     <height>680</height>
    </rect>
   </property>
@@ -14,80 +14,50 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="5" column="2">
-     <widget class="QOpenGLWidget" name="openGLWidget"/>
-    </item>
-    <item row="5" column="0">
-     <widget class="QTreeWidget" name="filestree">
-      <column>
-       <property name="text">
-        <string notr="true">1</string>
-       </property>
-      </column>
-     </widget>
-    </item>
-    <item row="0" column="0">
-     <widget class="QPushButton" name="btn_add_folder">
-      <property name="text">
-       <string>Add Folder</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="btn_refresh">
-        <property name="text">
-         <string>Refresh All</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Refresh Selected</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pushButton_3">
-        <property name="text">
-         <string>Remove Selected From Database</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
+   <layout class="QFormLayout" name="formLayout">
+    <item row="2" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Watchlist</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QListWidget" name="watchlist">
-      <item>
-       <property name="text">
-        <string>fds</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>New Item</string>
-       </property>
-      </item>
-     </widget>
-    </item>
     <item row="3" column="0">
+     <widget class="QListWidget" name="watchlist"/>
+    </item>
+    <item row="4" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <widget class="QPushButton" name="watch_refresh">
+        <property name="text">
+         <string>Refresh All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="watch_add">
+        <property name="text">
+         <string>Add Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="watch_remove">
+        <property name="text">
+         <string>Remove Selected</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="5" column="0">
      <widget class="QLabel" name="label_2">
       <property name="text">
        <string>Files</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
+    <item row="6" column="0">
      <widget class="QListWidget" name="fileslist">
       <item>
        <property name="text">
@@ -101,7 +71,44 @@
       </item>
      </widget>
     </item>
-    <item row="2" column="1">
+    <item row="7" column="0">
+     <widget class="QTreeWidget" name="filestree">
+      <column>
+       <property name="text">
+        <string notr="true">1</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <item>
+       <widget class="QPushButton" name="files_refresh">
+        <property name="text">
+         <string>Refresh All</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="files_add">
+        <property name="text">
+         <string>Add Folder</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="files_remove">
+        <property name="text">
+         <string>Remove Selected</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item row="9" column="0">
+     <widget class="QOpenGLWidget" name="openGLWidget"/>
+    </item>
+    <item row="3" column="1">
      <widget class="QLabel" name="labelimage">
       <property name="minimumSize">
        <size>
@@ -121,7 +128,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1228</width>
+     <width>1534</width>
      <height>21</height>
     </rect>
    </property>
