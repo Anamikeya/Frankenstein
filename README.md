@@ -1,28 +1,36 @@
-# Frankenstein
-Asset manager with feature support for 3D models, Audio, Video, Images
+# Frankenstein Asset Manager
 
-###System Requirements
-I've only tested on windows, but written "everything" to work crossplatform with pathlib etc.
+Frankenstein aims to be the best free open source Asset manager with feature support for 3D models, Audio, Video,
+Images.
 
-pyside6
+Frankenstein indexes files in selected folders that can be locally or on a network drive to speed up browsing.
 
+# TODO
 
-#Goals
-* Database (indexer) of files and folder
-* DB sees if you moved or changed a folder. Maybe only when trying to access that file? 
-* Refresh function
-* Add folders to "watchlist"
-* Add tests
+## Features
 
+* Make thumbnails of files and store locally
+* Add support for Audio files
+* Add support for 3d files
+* Add support for EXR files
+* DB sees if you moved or changed a folder. Maybe only when trying to access that file?
+* Add tests in code
 
-#Database
+## Optimize
 
-Sqlite3 using sqlite-utils to read write data. 
+* Only scan those files that have changed
 
-The database.db file (sqlite) contains tables of each folder that's indexed. 
+### System Requirements
 
+Only tested on windows so far, written "everything" to work crossplatform with pyside6, pathlib etc.
 
+# Database
 
+Sqlite3 using sqlite-utils to read write data.
 
-#Docs
-https://doc.qt.io/qtforpython/contents.html
+The database.db file (sqlite) contains tables of each folder that's indexed.
+
+# Docs
+
+[Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
+[Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
