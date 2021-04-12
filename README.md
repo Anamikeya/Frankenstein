@@ -40,7 +40,7 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 * Comments and code-cleanup for easier code
 
 
-# Docs
+# Documentation
 
 [Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
 
