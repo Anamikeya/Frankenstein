@@ -31,6 +31,7 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 
 * Drag & Drop functionallity
 * Make thumbnails of files and store locally
+* Combine Diffuse, Spec, Normalmap, Displacement Map etc files as one texture. 
 * Add support for Audio files
 * Add support for 3d files
 * Add support for EXR files
