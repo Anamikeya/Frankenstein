@@ -50,13 +50,13 @@ class MainWindow(QMainWindow):
 
     def _connectAll(self):
         self.watch_refresh.clicked.connect(self._refresh_ui)
-        self.watchlist.itemSelectionChanged.connect(self.watchlist_list_files)
+        self.watchlist.itemSelectionChanged.connect(self.fileslist_list_files)
         self.watch_add.clicked.connect(self.watchlist_add_folder)
         self.watch_remove.clicked.connect(self.watchlist_remove_selected)
         self.watch_scan_all.clicked.connect(self.watchlist_scan_all)
         self.watch_scan_selected.clicked.connect(self.watchlist_scan_selected)
         self.fileslist.itemSelectionChanged.connect(self.imageviever_show_image)
-        self.btn_filter.clicked.connect(self.fileslist_filter)
+        self.btn_filter.clicked.connect(self.fileslist_list_files)
 
     def _table_to_list(self, folder):
         timer_scan_folder_db = timer()
@@ -75,13 +75,23 @@ class MainWindow(QMainWindow):
         self.progressBar.setValue(val)
 
 
-    def fileslist_filter(self):
-        l.info(f'filtering files')
-        filter_string=self.filterinput.text()
-        l.info(filter_string)
+    def fileslist_list_files(self):
+        timeer = timer()
+        selected = self.watchlist.selectedItems()[0].text()
+        l.info(f'Listing files for {selected}')
 
+        listan=self._table_to_list(selected)
 
+        filtertext=self.filterinput.text()
 
+        if filtertext:
+            listan=[x for x in listan if x.endswith(filtertext)]
+
+        self.fileslist.clear()
+        self.fileslist.addItems(listan)
+        self.update()
+
+        l.info(f'Took {timeer}')
 
     def watchlist_add_folder(self):
         path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
@@ -92,19 +102,10 @@ class MainWindow(QMainWindow):
             l.info(f'Adding {path} to db')
             db[path].create({'path': str})
             l.info(f"Added {1} folder in {clock}")
-            self.refresh_ui()
+            self._refresh_ui()
 
         else:
             l.info('canceldd adding folder')
-
-    def watchlist_list_files(self):
-        timeer = timer()
-        selected = self.watchlist.selectedItems()[0].text()
-        l.info(f'Listing files for {selected}')
-        self.fileslist.clear()
-        self.fileslist.addItems(self._table_to_list(selected))
-        self.update()
-        l.info(f'Took {timeer}')
 
     def watchlist_remove_selected(self):
         # Can be optimized by removing it from gui only and db instead of refreshing the whole list from db after removing it.
@@ -148,7 +149,7 @@ class MainWindow(QMainWindow):
 
         l.info(f'Total took {timer_scan_total} refreshing...')
         self.updateProgressBar(100)
-        self.refresh_ui()
+        self._refresh_ui()
 
 
     def watchlist_scan_all(self):
@@ -184,7 +185,7 @@ class MainWindow(QMainWindow):
 
         l.info(f'Total took {timer_scan_all_total} refreshing...')
         self.updateProgressBar(100)
-        self.refresh_ui()
+        self._refresh_ui()
 
     def imageviever_show_image(self):
 
