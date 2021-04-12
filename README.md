@@ -70,3 +70,11 @@ The program (as of now) is not built with teams in mind even though switching to
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
 
 [QT Designer Download](https://build-system.fman.io/qt-designer-download)
+
+
+
+#openEXR
+
+https://openimageio.readthedocs.io/en/release-2.1.20.0/index.html
+https://sites.google.com/site/openimageio/home
+https://github.com/AcademySoftwareFoundation/openexr/blob/master/INSTALL.md

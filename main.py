@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
 
         listan = self._table_to_list(selected)
 
-        # Filtering #TODO check if this is case sensitive
+        # Filtering
         filtertext = self.filterinput.text()
 
         if filtertext:
@@ -95,7 +95,8 @@ class MainWindow(QMainWindow):
             newlistan = []
 
             for filt in filters:
-                newlistan.extend([x for x in listan if x.endswith(filt)])
+                newlistan.extend([x for x in listan if x.endswith(filt.lower())])
+                newlistan.extend([x for x in listan if x.endswith(filt.upper())])
             listan = newlistan
 
         number_of_files = len(listan)
