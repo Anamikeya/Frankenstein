@@ -29,11 +29,11 @@ class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         loader = QUiLoader()
-        # loader.load('ui.ui', self)
         load_ui('ui.ui', self)
         self.progressBar.setValue(12)
         self._connectAll()
         self._refresh_ui()
+        self.filterinput.setText('png jpeg jpg exr tif tiff')
 
     def _refresh_ui(self):
         refresh_timer = timer()
@@ -76,26 +76,27 @@ class MainWindow(QMainWindow):
 
     def fileslist_list_files(self):
         timeer = timer()
-        selected = self.watchlist.selectedItems()[0].text()
+        try:
+            selected = self.watchlist.selectedItems()[0].text()
+        except:
+            l.warning('Skipping fileslist_list_files selected couldnt be found')
+            return
         l.info(f'Listing files for {selected}')
 
         listan = self._table_to_list(selected)
 
-        # Filtering
+        # Filtering #TODO check if this is case sensitive
         filtertext = self.filterinput.text()
 
         if filtertext:
-
-            filters=filtertext.split()
+            filters = filtertext.split()
             l.info(f'filters: {filters}')
 
-            newlistan=[]
+            newlistan = []
 
             for filt in filters:
                 newlistan.extend([x for x in listan if x.endswith(filt)])
-
-            listan=newlistan
-
+            listan = newlistan
 
         number_of_files = len(listan)
 
