@@ -7,6 +7,9 @@ Frankenstein indexes files in selected folders that can be locally or on a netwo
 
 Code is written with crossplatform in mind (only windows tested so far). 
 
+###GUI
+TO edit the gui download the QT Designer (Link in bottom of readme) and just open the ui.ui file. 
+
 ### Code
 
 Crossplatform
@@ -42,3 +45,5 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 [Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
 
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
+
+[QT Designer](https://build-system.fman.io/qt-designer-download)
