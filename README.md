@@ -5,6 +5,18 @@ Images.
 
 Frankenstein indexes files in selected folders that can be locally or on a network drive to speed up browsing.
 
+Code is written with crossplatform in mind (only windows tested so far). 
+
+### Code
+
+Crossplatform
+GUI: Pyside6
+Database: SQLite (sqlite-utils to read/write)
+
+### Database
+
+The database.db file (sqlite) contains tables of each folder that's indexed.
+
 # TODO
 
 ## Features
@@ -19,16 +31,8 @@ Frankenstein indexes files in selected folders that can be locally or on a netwo
 ## Optimize
 
 * Only scan those files that have changed
+* Comments and code-cleanup for easier code
 
-### System Requirements
-
-Only tested on windows so far, written "everything" to work crossplatform with pyside6, pathlib etc.
-
-# Database
-
-Sqlite3 using sqlite-utils to read write data.
-
-The database.db file (sqlite) contains tables of each folder that's indexed.
 
 # Docs
 
