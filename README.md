@@ -1,4 +1,4 @@
-# Frankenstein Asset Manager
+# Frankenstein Assets Manager
 
 Frankenstein aims to be the best free open source Asset manager with feature support for 3D models, Audio, Video,
 Images. It is used to browse your large assets library of 3d models, large textures, video footage and sound fx etc fast and dragdrop them into your application of choice.
@@ -36,6 +36,7 @@ The program (as of now) is not built with teams in mind even though switching to
 
 ## Features
 
+* Make a dope frankenstein logo
 * Drag & Drop functionality
 * Make thumbnails of files and store locally
 * Combine Diffuse, Spec, Normal map, Displacement Map etc files as one texture. 
