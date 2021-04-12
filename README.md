@@ -36,9 +36,9 @@ The program (as of now) is not built with teams in mind even though switching to
 
 ## Features
 
-* Drag & Drop functionallity
+* Drag & Drop functionality
 * Make thumbnails of files and store locally
-* Combine Diffuse, Spec, Normalmap, Displacement Map etc files as one texture. 
+* Combine Diffuse, Spec, Normal map, Displacement Map etc files as one texture. 
 * Add support for Audio files
 * Add support for 3d files
 * Add support for EXR files
