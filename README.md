@@ -48,4 +48,4 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
 
-[QT Designer](https://build-system.fman.io/qt-designer-download)
+[QT Designer Download](https://build-system.fman.io/qt-designer-download)
