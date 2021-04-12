@@ -53,6 +53,20 @@
          </widget>
         </item>
         <item>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Filter Files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="filterinput"/>
+          </item>
+         </layout>
+        </item>
+        <item>
          <widget class="QListWidget" name="fileslist">
           <property name="minimumSize">
            <size>
@@ -221,7 +235,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>790</y>
+      <y>810</y>
       <width>358</width>
       <height>23</height>
      </rect>
