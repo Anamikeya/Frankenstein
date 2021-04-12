@@ -5,13 +5,13 @@ Images.
 
 Frankenstein indexes files in selected folders that can be locally or on a network drive to speed up browsing.
 
-Code is written with crossplatform in mind (only windows tested so far). 
-
+Code is written with crossplatform in mind (only windows tested so far).
 
 [Video showing basic functionality](https://www.youtube.com/watch?v=IhL5Lrm5JWU)
 
-###GUI
-TO edit the gui download the QT Designer (Link in bottom of readme) and just open the ui.ui file. 
+### GUI
+
+TO edit the gui download the QT Designer (Link in bottom of readme) and just open the ui.ui file.
 
 ### Code
 
@@ -20,7 +20,6 @@ Crossplatform
 GUI: Pyside6
 
 Database: SQLite (sqlite-utils to read/write)
-
 
 ### Database
 
@@ -38,10 +37,10 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 * Add tests in code
 
 ## Optimize
-* Do scanning using QtThread or just thread, whats better? 
+
+* Do scanning using QtThread or just thread, whats better?
 * Only scan those files that have changed
 * Comments and code-cleanup for easier code
-
 
 # Documentation
 
