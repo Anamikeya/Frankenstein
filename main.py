@@ -74,21 +74,34 @@ class MainWindow(QMainWindow):
         l.info(f'Setting progressbar to something')
         self.progressBar.setValue(val)
 
-
     def fileslist_list_files(self):
         timeer = timer()
         selected = self.watchlist.selectedItems()[0].text()
         l.info(f'Listing files for {selected}')
 
-        listan=self._table_to_list(selected)
+        listan = self._table_to_list(selected)
 
-        filtertext=self.filterinput.text()
+        # Filtering
+        filtertext = self.filterinput.text()
 
         if filtertext:
-            listan=[x for x in listan if x.endswith(filtertext)]
+
+            filters=filtertext.split()
+            l.info(f'filters: {filters}')
+
+            newlistan=[]
+
+            for filt in filters:
+                newlistan.extend([x for x in listan if x.endswith(filt)])
+
+            listan=newlistan
+
+
+        number_of_files = len(listan)
 
         self.fileslist.clear()
         self.fileslist.addItems(listan)
+        self.number_of_files.setText(f'{number_of_files} files')
         self.update()
 
         l.info(f'Took {timeer}')
@@ -119,7 +132,7 @@ class MainWindow(QMainWindow):
         self.refresh_ui()
 
     def watchlist_scan_selected(self):
-        selected=self.watchlist.selectedItems()[0].text()
+        selected = self.watchlist.selectedItems()[0].text()
         l.info(f"Scanning selected {selected}")
         timer_scan_total = timer()
 
@@ -150,7 +163,6 @@ class MainWindow(QMainWindow):
         l.info(f'Total took {timer_scan_total} refreshing...')
         self.updateProgressBar(100)
         self._refresh_ui()
-
 
     def watchlist_scan_all(self):
         watchlist = self._get_watchlist()

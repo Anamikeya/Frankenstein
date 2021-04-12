@@ -62,7 +62,17 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="filterinput"/>
+           <widget class="QLineEdit" name="filterinput">
+            <property name="inputMask">
+             <string/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="placeholderText">
+             <string>Separate filetypes with spaces eg (png jpg)</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -73,6 +83,13 @@
             <width>500</width>
             <height>0</height>
            </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="number_of_files">
+          <property name="text">
+           <string>TextLabel</string>
           </property>
          </widget>
         </item>
