@@ -35,10 +35,18 @@ class MainWindow(QMainWindow):
         self._connectAll()
         self.refresh_ui()
 
-    def updateProgressBar(self, val):
-        # TODO do this in thread instead
-        l.info(f'Setting progressbar to something')
-        self.progressBar.setValue(val)
+    def _refresh_ui(self):
+        refresh_timer = timer()
+        l.info(f'Refreshing UI')
+
+        self.watchlist.clear()
+        self.fileslist.clear()
+
+        self.watchlist.addItems(self._get_watchlist())
+
+        QCoreApplication.processEvents()
+        self.update()
+        l.info(f'Refreshed UI in {refresh_timer}')
 
     def _connectAll(self):
         self.watch_add.clicked.connect(self.add_folder)
@@ -60,7 +68,12 @@ class MainWindow(QMainWindow):
     def _get_watchlist(self):
         return [str(x.name) for x in db.tables]
 
-    def add_folder(self):
+    def updateProgressBar(self, val):
+        # TODO do this in thread instead
+        l.info(f'Setting progressbar to something')
+        self.progressBar.setValue(val)
+
+    def watchlist_add_folder(self):
         path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
 
         if path:
@@ -74,7 +87,16 @@ class MainWindow(QMainWindow):
         else:
             l.info('canceldd adding folder')
 
-    def removeSelected(self):
+    def watchlist_list_files(self):
+        timeer = timer()
+        selected = self.watchlist.selectedItems()[0].text()
+        l.info(f'Listing files for {selected}')
+        self.fileslist.clear()
+        self.fileslist.addItems(self._table_to_list(selected))
+        self.update()
+        l.info(f'Took {timeer}')
+
+    def watchlist_remove_selected(self):
         # Can be optimized by removing it from gui only and db instead of refreshing the whole list from db after removing it.
 
         selected = self.watchlist.selectedItems()[0].text()
@@ -85,54 +107,7 @@ class MainWindow(QMainWindow):
 
         self.refresh_ui()
 
-    def listFiles(self):
-        timeer = timer()
-        selected = self.watchlist.selectedItems()[0].text()
-        l.info(f'Listing files for {selected}')
-        self.fileslist.clear()
-        self.fileslist.addItems(self._table_to_list(selected))
-        self.update()
-        l.info(f'Took {timeer}')
-
-    def showImage(self):
-
-        timeer = timer()
-        selected = self.fileslist.selectedItems()[0].text()
-        l.info(f'Showing image for {selected}')
-
-        #image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"),
-        #
-        #                                           self.tr("Images (*.jpg)"))
-
-        #actualImage = QtGui.QImage(selected)
-        pixmap = QtGui.QPixmap(selected)
-
-        pixmap = pixmap.scaled(500, 500, QtCore.Qt.KeepAspectRatio)
-        #lbl = QtGui.QLabel(self)
-        #lbl.setPixmap(pixmap)
-
-        #lbl.setScaledContents(True)
-
-        #pixmap = QPixmap(pixmap)
-        self.labelimage.setPixmap(pixmap)
-        self.labelimage.setScaledContents(True)
-        l.info(f'Took {timeer}')
-
-    def refresh_ui(self):
-        refresh_timer = timer()
-        l.info(f'Refreshing UI')
-
-        self.watchlist.clear()
-        self.fileslist.clear()
-
-        self.watchlist.addItems(self._get_watchlist())
-
-        QCoreApplication.processEvents()
-        self.update()
-        l.info(f'Refreshed UI in {refresh_timer}')
-
-
-    def scan_selected(self):
+    def watchlist_scan_selected(self):
         selected=self.watchlist.selectedItems()[0].text()
         l.info(f"Scanning selected {selected}")
         timer_scan_total = timer()
@@ -165,7 +140,8 @@ class MainWindow(QMainWindow):
         self.updateProgressBar(100)
         self.refresh_ui()
 
-    def scan_all(self):
+
+    def watchlist_scan_all(self):
         watchlist = self._get_watchlist()
         l.info(f"Scanning all {len(watchlist)} folders in watchlist")
         timer_scan_all_total = timer()
@@ -199,6 +175,21 @@ class MainWindow(QMainWindow):
         l.info(f'Total took {timer_scan_all_total} refreshing...')
         self.updateProgressBar(100)
         self.refresh_ui()
+
+    def imageviever_show_image(self):
+
+        timeer = timer()
+        selected = self.fileslist.selectedItems()[0].text()
+        l.info(f'Showing image for {selected}')
+
+        actualImage = QtGui.QImage(selected)
+        pixmap = QtGui.QPixmap(actualImage)
+
+        pixmap = pixmap.scaled(500, 500, QtCore.Qt.KeepAspectRatio)
+
+        self.labelimage.setPixmap(pixmap)
+        self.labelimage.setScaledContents(True)
+        l.info(f'Took {timeer}')
 
 
 def scan_folder_disk(folder):
