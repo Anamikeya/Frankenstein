@@ -16,21 +16,23 @@ from PySide6.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF
 from filepickertest import ImageViewer
 from ui_loader import load_ui
 
-
 l = init_logger('frankenstein')
 db = sql.Database('database.db')
+
 
 def infomsg(parent, msg: str):
     QMessageBox.information(parent, 'Title', msg, QMessageBox.Ok)
 
+
 def errormsg(parent, msg: str = 'test'):
     QMessageBox.critical(parent, "Title", msg, QMessageBox.Ok)
+
 
 class MainWindow(QMainWindow):
     def __init__(self, parent=None):
         QMainWindow.__init__(self, parent)
         loader = QUiLoader()
-        #loader.load('ui.ui', self)
+        # loader.load('ui.ui', self)
         load_ui('ui.ui', self)
         self._connectAll()
         self.refresh_ui()
@@ -41,15 +43,19 @@ class MainWindow(QMainWindow):
         self.watch_remove.clicked.connect(self.removeSelected)
 
     def removeSelected(self):
-        #watchlist remove selected
+        # Can be optimized by removing it from gui only and db instead of refreshing the whole list from db after removing it.
 
-        selected=self.watchlist.selectedItems()[0].text()
+        selected = self.watchlist.selectedItems()[0].text()
+
+        l.info(f'Removing selected: {selected}')
         l.info(selected)
+        db['watchlist'].delete_where('path == ?',[selected])
+        db.conn.commit()
 
-
+        self.refresh_ui()
 
     def refresh_ui(self):
-        refresh_timer=timer()
+        refresh_timer = timer()
         l.info(f'Refreshing UI')
 
         self.watchlist.clear()
@@ -62,21 +68,23 @@ class MainWindow(QMainWindow):
         l.info(f'Refreshed UI in {refresh_timer}')
 
     def showImage(self):
-        image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"), self.tr("Images (*.jpg)"))
+        image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"),
+                                                    self.tr("Images (*.jpg)"))
         pixmap = QPixmap(image_path)
         self.labelimage.setPixmap(pixmap)
 
     def add_folder(self):
-        path=QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
+        path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
 
         if path:
             clock = timer()
             l.info(f'Adding {1} folder to watchlist')
-            db['watchlist'].insert_all([{'path':str(path)}])
+            db['watchlist'].insert_all([{'path': str(path)}])
             l.info(f"Added {1} folder in {clock}")
 
         else:
             l.info('canceldd adding folder')
+
 
 def scan_all(watchlist):
     l.info(f"Scanning all {len(watchlist)} folders in watchlist")
@@ -109,11 +117,14 @@ def scan_all(watchlist):
 
 def scan_folder_disk(folder):
     timer_scan_folder_disk = timer()
-    l.info(f'Scanning folder {str(folder)}')
+    l.info(f'Adding folder {str(folder)}')
+    l.warning('Deleing previous records')
+    db[folder].delete_where()
+    l.info('Deleted')
+    l.info(f'Scanning...')
     files_folders = list(folder.rglob("*"))
     l.info(f'Scan took {timer_scan_folder_disk}')
     return files_folders
-
 
 def scan_folder_db(folder):
     timer_scan_folder_db = timer()
@@ -123,10 +134,6 @@ def scan_folder_db(folder):
     l.info(f'Scan took {timer_scan_folder_db}')
     return files_list
 
-def watchlist_del():
-    pass
-def watchlist_add():
-    pass
 
 if __name__ == "__main__":
     watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
