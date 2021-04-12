@@ -29,6 +29,7 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 
 ## Features
 
+* Drag & Drop functionallity
 * Make thumbnails of files and store locally
 * Add support for Audio files
 * Add support for 3d files
