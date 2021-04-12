@@ -10,8 +10,11 @@ Code is written with crossplatform in mind (only windows tested so far).
 ### Code
 
 Crossplatform
+
 GUI: Pyside6
+
 Database: SQLite (sqlite-utils to read/write)
+
 
 ### Database
 
@@ -37,4 +40,5 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 # Docs
 
 [Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
+
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
