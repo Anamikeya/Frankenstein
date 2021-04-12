@@ -33,7 +33,7 @@ class MainWindow(QMainWindow):
         load_ui('ui.ui', self)
         self.progressBar.setValue(12)
         self._connectAll()
-        self.refresh_ui()
+        self._refresh_ui()
 
     def _refresh_ui(self):
         refresh_timer = timer()
@@ -49,13 +49,13 @@ class MainWindow(QMainWindow):
         l.info(f'Refreshed UI in {refresh_timer}')
 
     def _connectAll(self):
-        self.watch_add.clicked.connect(self.add_folder)
-        self.watch_refresh.clicked.connect(self.refresh_ui)
-        self.watch_remove.clicked.connect(self.removeSelected)
-        self.watch_scan_all.clicked.connect(self.scan_all)
-        self.watch_scan_selected.clicked.connect(self.scan_selected)
-        self.watchlist.itemSelectionChanged.connect(self.listFiles)
-        self.fileslist.itemSelectionChanged.connect(self.showImage)
+        self.watch_refresh.clicked.connect(self._refresh_ui)
+        self.watchlist.itemSelectionChanged.connect(self.watchlist_list_files)
+        self.watch_add.clicked.connect(self.watchlist_add_folder)
+        self.watch_remove.clicked.connect(self.watchlist_remove_selected)
+        self.watch_scan_all.clicked.connect(self.watchlist_scan_all)
+        self.watch_scan_selected.clicked.connect(self.watchlist_scan_selected)
+        self.fileslist.itemSelectionChanged.connect(self.imageviever_show_image)
 
     def _table_to_list(self, folder):
         timer_scan_folder_db = timer()
