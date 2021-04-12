@@ -56,6 +56,7 @@ class MainWindow(QMainWindow):
         self.watch_scan_all.clicked.connect(self.watchlist_scan_all)
         self.watch_scan_selected.clicked.connect(self.watchlist_scan_selected)
         self.fileslist.itemSelectionChanged.connect(self.imageviever_show_image)
+        self.btn_filter.clicked.connect(self.fileslist_filter)
 
     def _table_to_list(self, folder):
         timer_scan_folder_db = timer()
@@ -72,6 +73,15 @@ class MainWindow(QMainWindow):
         # TODO do this in thread instead
         l.info(f'Setting progressbar to something')
         self.progressBar.setValue(val)
+
+
+    def fileslist_filter(self):
+        l.info(f'filtering files')
+        filter_string=self.filterinput.text()
+        l.info(filter_string)
+
+
+
 
     def watchlist_add_folder(self):
         path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
