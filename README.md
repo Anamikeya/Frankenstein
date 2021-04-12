@@ -35,7 +35,7 @@ The database.db file (sqlite) contains tables of each folder that's indexed.
 * Add tests in code
 
 ## Optimize
-
+* Do scanning using QtThread or just thread, whats better? 
 * Only scan those files that have changed
 * Comments and code-cleanup for easier code
 
