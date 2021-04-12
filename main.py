@@ -35,10 +35,8 @@ class MainWindow(QMainWindow):
         self._connectAll()
         self.refresh_ui()
 
-
-
-    def updateProgressBar(self,val):
-        #TODO do this in thread instead
+    def updateProgressBar(self, val):
+        # TODO do this in thread instead
         l.info(f'Setting progressbar to something')
         self.progressBar.setValue(val)
 
@@ -47,6 +45,9 @@ class MainWindow(QMainWindow):
         self.watch_refresh.clicked.connect(self.refresh_ui)
         self.watch_remove.clicked.connect(self.removeSelected)
         self.watch_scan_all.clicked.connect(self.scan_all)
+        self.watch_scan_selected.clicked.connect(self.scan_selected)
+        self.watchlist.itemSelectionChanged.connect(self.listFiles)
+        self.fileslist.itemSelectionChanged.connect(self.showImage)
 
     def _table_to_list(self, folder):
         timer_scan_folder_db = timer()
@@ -84,11 +85,45 @@ class MainWindow(QMainWindow):
 
         self.refresh_ui()
 
+    def listFiles(self):
+        timeer = timer()
+        selected = self.watchlist.selectedItems()[0].text()
+        l.info(f'Listing files for {selected}')
+        self.fileslist.clear()
+        self.fileslist.addItems(self._table_to_list(selected))
+        self.update()
+        l.info(f'Took {timeer}')
+
+    def showImage(self):
+
+        timeer = timer()
+        selected = self.fileslist.selectedItems()[0].text()
+        l.info(f'Showing image for {selected}')
+
+        #image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"),
+        #
+        #                                           self.tr("Images (*.jpg)"))
+
+        #actualImage = QtGui.QImage(selected)
+        pixmap = QtGui.QPixmap(selected)
+
+        pixmap = pixmap.scaled(500, 500, QtCore.Qt.KeepAspectRatio)
+        #lbl = QtGui.QLabel(self)
+        #lbl.setPixmap(pixmap)
+
+        #lbl.setScaledContents(True)
+
+        #pixmap = QPixmap(pixmap)
+        self.labelimage.setPixmap(pixmap)
+        self.labelimage.setScaledContents(True)
+        l.info(f'Took {timeer}')
+
     def refresh_ui(self):
         refresh_timer = timer()
         l.info(f'Refreshing UI')
 
         self.watchlist.clear()
+        self.fileslist.clear()
 
         self.watchlist.addItems(self._get_watchlist())
 
@@ -96,11 +131,39 @@ class MainWindow(QMainWindow):
         self.update()
         l.info(f'Refreshed UI in {refresh_timer}')
 
-    def showImage(self):
-        image_path, _ = QFileDialog.getOpenFileName(self, self.tr("Load Image"), self.tr("~/Desktop/"),
-                                                    self.tr("Images (*.jpg)"))
-        pixmap = QPixmap(image_path)
-        self.labelimage.setPixmap(pixmap)
+
+    def scan_selected(self):
+        selected=self.watchlist.selectedItems()[0].text()
+        l.info(f"Scanning selected {selected}")
+        timer_scan_total = timer()
+
+        self.updateProgressBar(0)
+        l.info('#' * 50)
+        timer_scan = timer()
+        l.info(f'Dropping folder...')
+        db[selected].drop()
+        db.conn.commit()
+        files_folders = list(Path(selected).rglob("*"))
+        l.info(f"Found {len(files_folders)} files and folders total in {timer_scan}")
+
+        # l.info('TODO cleaning db if exists')
+
+        l.info(f'Checking which is file and folder (can prob be optimized)')
+        timer_filefolder = timer()
+        files = [x for x in files_folders if x.is_file()]
+        l.info(f'Found {len(files)} files')
+        l.info(f'Found {len(files_folders) - len(files)} folders')
+        files_clean = [{'path': str(x)} for x in files]
+        l.info(f'Took {timer_filefolder}')
+
+        l.info('Writing to db')
+        timer_db_write = timer()
+        db[str(selected)].insert_all(files_clean)
+        l.info(f'Took {timer_db_write}')
+
+        l.info(f'Total took {timer_scan_total} refreshing...')
+        self.updateProgressBar(100)
+        self.refresh_ui()
 
     def scan_all(self):
         watchlist = self._get_watchlist()
@@ -108,7 +171,7 @@ class MainWindow(QMainWindow):
         timer_scan_all_total = timer()
 
         for i, folder in enumerate(watchlist):
-            self.updateProgressBar((i+1)/len(watchlist)*100)
+            self.updateProgressBar((i + 1) / len(watchlist) * 100)
             l.info('#' * 50)
             l.info(f"Scanning folder {i} of {len(watchlist)}  {folder}")
             timer_scan = timer()
@@ -148,7 +211,6 @@ def scan_folder_disk(folder):
     files_folders = list(folder.rglob("*"))
     l.info(f'Scan took {timer_scan_folder_disk}')
     return files_folders
-
 
 
 if __name__ == "__main__":
