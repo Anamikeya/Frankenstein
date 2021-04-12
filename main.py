@@ -1,8 +1,5 @@
-from datetime import datetime
-
 from PySide6 import QtCore, QtWidgets, QtGui
 from pathlib import Path
-import numpy as np
 from PySide6.QtGui import QIcon, QPixmap
 
 from blom import init_logger, timer
@@ -13,8 +10,8 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, Q
     QFileDialog
 from PySide6.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF, Slot
 
-from filepickertest import ImageViewer
 from ui_loader import load_ui
+from time import sleep
 
 l = init_logger('frankenstein')
 db = sql.Database('database.db')
@@ -34,22 +31,55 @@ class MainWindow(QMainWindow):
         loader = QUiLoader()
         # loader.load('ui.ui', self)
         load_ui('ui.ui', self)
+        self.progressBar.setValue(12)
         self._connectAll()
         self.refresh_ui()
+
+
+
+    def updateProgressBar(self,val):
+        #TODO do this in thread instead
+        l.info(f'Setting progressbar to something')
+        self.progressBar.setValue(val)
 
     def _connectAll(self):
         self.watch_add.clicked.connect(self.add_folder)
         self.watch_refresh.clicked.connect(self.refresh_ui)
         self.watch_remove.clicked.connect(self.removeSelected)
+        self.watch_scan_all.clicked.connect(self.scan_all)
+
+    def _table_to_list(self, folder):
+        timer_scan_folder_db = timer()
+        l.info(f'Looking in db for {str(folder)}')
+        files = list(db[str(folder)].rows_where(select="path"))
+        files_list = [x['path'] for x in files]
+        l.info(f'Took {timer_scan_folder_db}, returning files')
+        return files_list
+
+    def _get_watchlist(self):
+        return [str(x.name) for x in db.tables]
+
+    def add_folder(self):
+        path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
+
+        if path:
+
+            clock = timer()
+            l.info(f'Adding {path} to db')
+            db[path].create({'path': str})
+            l.info(f"Added {1} folder in {clock}")
+            self.refresh_ui()
+
+        else:
+            l.info('canceldd adding folder')
 
     def removeSelected(self):
         # Can be optimized by removing it from gui only and db instead of refreshing the whole list from db after removing it.
 
         selected = self.watchlist.selectedItems()[0].text()
 
-        l.info(f'Removing selected: {selected}')
-        l.info(selected)
-        db['watchlist'].delete_where('path == ?',[selected])
+        l.info(f'Removing selected table: {selected}')
+        db[selected].drop()
         db.conn.commit()
 
         self.refresh_ui()
@@ -60,8 +90,7 @@ class MainWindow(QMainWindow):
 
         self.watchlist.clear()
 
-        items = scan_folder_db('watchlist')
-        self.watchlist.addItems(items)
+        self.watchlist.addItems(self._get_watchlist())
 
         QCoreApplication.processEvents()
         self.update()
@@ -73,46 +102,40 @@ class MainWindow(QMainWindow):
         pixmap = QPixmap(image_path)
         self.labelimage.setPixmap(pixmap)
 
-    def add_folder(self):
-        path = QFileDialog.getExistingDirectory(self, self.tr("Load Folder"))
+    def scan_all(self):
+        watchlist = self._get_watchlist()
+        l.info(f"Scanning all {len(watchlist)} folders in watchlist")
+        timer_scan_all_total = timer()
 
-        if path:
-            clock = timer()
-            l.info(f'Adding {1} folder to watchlist')
-            db['watchlist'].insert_all([{'path': str(path)}])
-            l.info(f"Added {1} folder in {clock}")
+        for i, folder in enumerate(watchlist):
+            self.updateProgressBar((i+1)/len(watchlist)*100)
+            l.info('#' * 50)
+            l.info(f"Scanning folder {i} of {len(watchlist)}  {folder}")
+            timer_scan = timer()
+            l.info(f'Dropping folder...')
+            db[folder].drop()
+            db.conn.commit()
+            files_folders = list(Path(folder).rglob("*"))
+            l.info(f"Found {len(files_folders)} files and folders total in {timer_scan}")
 
-        else:
-            l.info('canceldd adding folder')
+            # l.info('TODO cleaning db if exists')
 
+            l.info(f'Checking which is file and folder (can prob be optimized)')
+            timer_filefolder = timer()
+            files = [x for x in files_folders if x.is_file()]
+            l.info(f'Found {len(files)} files')
+            l.info(f'Found {len(files_folders) - len(files)} folders')
+            files_clean = [{'path': str(x)} for x in files]
+            l.info(f'Took {timer_filefolder}')
 
-def scan_all(watchlist):
-    l.info(f"Scanning all {len(watchlist)} folders in watchlist")
-    timer_scan_all_total = timer()
+            l.info('Writing to db')
+            timer_db_write = timer()
+            db[str(folder)].insert_all(files_clean)
+            l.info(f'Took {timer_db_write}')
 
-    for i, folder in enumerate(watchlist):
-        l.info('#' * 50)
-        l.info(f"Scanning folder {i} of {len(watchlist)}  {folder}")
-        timer_scan = timer()
-        files_folders = list(folder.rglob("*"))
-        l.info(f"Found {len(files_folders)} files and folders total in {timer_scan}")
-
-        # l.info('TODO cleaning db if exists')
-
-        l.info(f'Checking which is file and folder (can prob be optimized)')
-        timer_filefolder = timer()
-        files = [x for x in files_folders if x.is_file()]
-        l.info(f'Found {len(files)} files')
-        l.info(f'Found {len(files_folders) - len(files)} folders')
-        files_clean = [{'path': str(x)} for x in files]
-        l.info(f'Took {timer_filefolder}')
-
-        l.info('Writing to db')
-        timer_db_write = timer()
-        db[str(folder)].insert_all(files_clean)
-        l.info(f'Took {timer_db_write}')
-
-    l.info(f'Total took {timer_scan_all_total}')
+        l.info(f'Total took {timer_scan_all_total} refreshing...')
+        self.updateProgressBar(100)
+        self.refresh_ui()
 
 
 def scan_folder_disk(folder):
@@ -126,13 +149,6 @@ def scan_folder_disk(folder):
     l.info(f'Scan took {timer_scan_folder_disk}')
     return files_folders
 
-def scan_folder_db(folder):
-    timer_scan_folder_db = timer()
-    l.info(f'Scanning db for folder {str(folder)}')
-    files = list(db[str(folder)].rows_where(select="path"))
-    files_list = [x['path'] for x in files]
-    l.info(f'Scan took {timer_scan_folder_db}')
-    return files_list
 
 
 if __name__ == "__main__":
