@@ -1,7 +1,7 @@
 # Frankenstein Assets Manager
 
 Frankenstein aims to be the best free open source Asset manager with feature support for 3D models, Audio, Video,
-Images. It is used to browse your large assets library of 3d models, large textures, video footage and sound fx etc fast and dragdrop them into your application of choice.
+Images. It is used to browse your large assets library of 3d models, large textures, video footage and sound fx etc fast and dragdrop them into your application of choice. As of now it's not a project manager, but manages the assets of a bigger assets library with 3d models images audio etc.
 
 ### Why?
 #### The initial issue that started this project
