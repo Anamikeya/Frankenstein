@@ -1,7 +1,7 @@
 # Frankenstein Assets Manager
 
 Frankenstein aims to be the best free open source Asset manager with feature support for 3D models, Audio, Video,
-Images. It is used to browse your large assets library of 3d models, large textures, video footage and sound fx etc fast and dragdrop them into your application of choice.
+Images. It is used to browse your large assets library of 3d models, large textures, video footage and sound fx etc fast and dragdrop them into your application of choice. As of now it's not a project manager, but manages the assets of a bigger assets library with 3d models images audio etc.
 
 ### Why?
 #### The initial issue that started this project
@@ -24,7 +24,7 @@ TO edit the gui download the QT Designer (Link in bottom of readme) and just ope
 
 Crossplatform - Code is written with crossplatform in mind (only windows tested so far).
 
-GUI: Pyside6
+GUI: Pyside2
 
 Database: SQLite (sqlite-utils to read/write)
 
@@ -33,7 +33,8 @@ The program (as of now) is not built with teams in mind even though switching to
 
 # Documentation
 
-[Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
+
+[Pyside2 Documentation](https://doc.qt.io/qtforpython-5/contents.html)
 
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
 
@@ -41,8 +42,13 @@ The program (as of now) is not built with teams in mind even though switching to
 
 
 
-#openEXR
+# openEXR
 
 https://openimageio.readthedocs.io/en/release-2.1.20.0/index.html
 https://sites.google.com/site/openimageio/home
 https://github.com/AcademySoftwareFoundation/openexr/blob/master/INSTALL.md
+
+
+# Other Links
+https://vfxplatform.com/
+[Codec Pack for Win](https://codecguide.com/download_k-lite_codec_pack_basic.htm)
