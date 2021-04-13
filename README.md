@@ -35,8 +35,6 @@ The program (as of now) is not built with teams in mind even though switching to
 # TODO
 
 ## Features
-
-* Filter files based on filetype
   
 * Filter files based on regex
 * Make a dope frankenstein logo
