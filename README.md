@@ -36,7 +36,6 @@ The program (as of now) is not built with teams in mind even though switching to
 
 ## Features
   
-* Filter files based on regex
 * Make a dope frankenstein logo
 * Drag & Drop functionality
 * Make thumbnails of files and store locally
