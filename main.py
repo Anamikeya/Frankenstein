@@ -5,10 +5,10 @@ from PySide6.QtGui import QIcon, QPixmap
 from blom import init_logger, timer
 import sqlite_utils as sql
 import sys
-from PySide6.QtUiTools import QUiLoader
-from PySide6.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QTableWidget, QListWidgetItem, QLineEdit, \
+from PySide2.QtUiTools import QUiLoader
+from PySide2.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QTableWidget, QListWidgetItem, QLineEdit, \
     QFileDialog
-from PySide6.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF, Slot
+from PySide2.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF, Slot
 
 from ui_loader import load_ui
 from time import sleep

@@ -1,5 +1,5 @@
-from PySide6.QtCore import QMetaObject
-from PySide6.QtUiTools import QUiLoader
+from PySide2.QtCore import QMetaObject
+from PySide2.QtUiTools import QUiLoader
 
 
 class _UiLoader(QUiLoader):
