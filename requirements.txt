@@ -1,3 +1,4 @@
-pyside6
+pyside2
 numpy
 sqlite-utils
+Qt.py
