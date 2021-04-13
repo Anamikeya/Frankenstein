@@ -31,35 +31,6 @@ Database: SQLite (sqlite-utils to read/write)
 ### Teams
 The program (as of now) is not built with teams in mind even though switching to a postgres db and version control would solve most of it. 
 
-
-# TODO
-
-## Features
-  
-* Make a dope frankenstein logo
-* Drag & Drop functionality
-* Make thumbnails of files and store locally
-* Combine Diffuse, Spec, Normal map, Displacement Map etc files as one texture. 
-* Add support for Audio files
-* Add support for 3d files
-* Add support for EXR files
-* Version Control of files and assets
-* DB sees if you moved or changed a folder. Maybe only when trying to access that file?
-* Add tests in code
-* Handling of proxy files
-* Renaming and moving files (in thread please)
-* Blender Addon
-* Maya Addon
-* Houdini Addon
-* Postgres implementation for teams
-* 
-
-## Optimize
-
-* Do scanning using QtThread or just thread, whats better?
-* Only scan those files that have changed
-* Comments and code-cleanup for easier code
-
 # Documentation
 
 [Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
