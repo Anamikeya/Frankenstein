@@ -24,7 +24,7 @@ TO edit the gui download the QT Designer (Link in bottom of readme) and just ope
 
 Crossplatform - Code is written with crossplatform in mind (only windows tested so far).
 
-GUI: Pyside6
+GUI: Pyside2
 
 Database: SQLite (sqlite-utils to read/write)
 
@@ -33,7 +33,8 @@ The program (as of now) is not built with teams in mind even though switching to
 
 # Documentation
 
-[Pyside6 Documentation](https://doc.qt.io/qtforpython/contents.html)
+
+[Pyside2 Documentation](https://doc.qt.io/qtforpython-5/contents.html)
 
 [Sqlite-utils Documentation](https://sqlite-utils.datasette.io/en/stable/python-api.html)
 
