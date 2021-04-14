@@ -52,3 +52,4 @@ https://github.com/AcademySoftwareFoundation/openexr/blob/master/INSTALL.md
 # Other Links
 https://vfxplatform.com/
 [Codec Pack for Win](https://codecguide.com/download_k-lite_codec_pack_basic.htm)
+https://github.com/asnunes/QTimeLine
