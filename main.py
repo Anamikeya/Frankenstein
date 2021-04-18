@@ -9,7 +9,7 @@ from PySide2.QtUiTools import QUiLoader
 from PySide2.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox, QTableWidget, QListWidgetItem, QLineEdit, \
     QFileDialog
 from PySide2.QtCore import QFile, QIODevice, QSize, Qt, QCoreApplication, QRectF, Slot
-
+import re
 from ui_loader import load_ui
 from time import sleep
 
@@ -100,6 +100,8 @@ class MainWindow(QMainWindow):
             listan = newlistan
 
         number_of_files = len(listan)
+
+        self.currentFiles = listan
 
         self.fileslist.clear()
         self.fileslist.addItems(listan)
@@ -238,3 +240,83 @@ if __name__ == "__main__":
     self = MainWindow()
     self.show()
     sys.exit(app.exec_())
+
+
+class sortImageSequence:
+    regexPattern = r'\.[0-9]{1,100}\.'
+
+    @staticmethod
+    def _getFrameNumber(path: str):
+        """
+        Returns the frameNumber and regex match based on path
+
+        re.search(r'\.[0-9]{1,100}\.[a-z]+',x) #match frames and extension
+        re.search(r'\.[0-9]{1,100}\.',x) #match frames
+        """
+        match = re.search(sortImageSequence.regexPattern, str(path))  # match frames
+        if match:
+            match_clean = match.group()
+            match_clean = match_clean[1:-1]  # remove the dots
+            match_clean = int(match_clean)
+            return (match_clean, match)
+        else:
+            return None
+
+
+    @staticmethod
+    def combinedPaths(paths: list) -> str:
+        """
+        Returns a string with combined framerange from the inserted list
+        """
+        framelist = [sortImageSequence._getFrameNumber(x) for x in paths]
+        startframe=min([x[0] for x in framelist if x])
+        endframe=max([x[0] for x in framelist if x])
+
+
+        out=[]
+
+        for cleanstr in paths:
+
+            delrange=framelist[0][1].regs[0]
+
+            numberlength=len(str(framelist[0][0]))
+
+
+            outstrtemp=cleanstr[:delrange[0]]+"."+("#"*numberlength)+"."+cleanstr[delrange[1]:]
+
+            outstrrange = cleanstr[:delrange[0]] + "." + (str(startframe)+'-'+str(endframe)) + "." + cleanstr[delrange[1]:]
+
+            out.append({'outtemp':outstrtemp,
+               'outrange':outstrrange})
+
+
+        #make mega dict
+        megadict={}
+
+
+        #for x in out: #TODO denna loopen som måste loopa över dict inte list
+        #    megadict[out['outtemp']]=[]
+
+
+        return megadict
+
+
+
+
+"""
+files=self.currentFiles
+x=files[0]
+
+paths=files[0:10]
+
+out=sortImageSequence.combinedPaths(paths)
+
+
+out=sortImageSequence.combinedPaths(files)
+
+a=sortImageSequence.combinedPaths(files)
+
+
+[]
+
+"""
