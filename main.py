@@ -57,6 +57,10 @@ class MainWindow(QMainWindow):
         self.watch_scan_selected.clicked.connect(self.watchlist_scan_selected)
         self.fileslist.itemSelectionChanged.connect(self.imageviever_show_image)
         self.btn_filter.clicked.connect(self.fileslist_list_files)
+        self.checkBoxGroupImageSequences.stateChanged.connect(self.groupImageSequences)
+
+    def test(self):
+        print("hahahaha")
 
     def _table_to_list(self, folder):
         timer_scan_folder_db = timer()
@@ -66,6 +70,7 @@ class MainWindow(QMainWindow):
         l.info(f'Took {timer_scan_folder_db}, returning files')
         return files_list
 
+
     def _get_watchlist(self):
         return [str(x.name) for x in db.tables]
 
@@ -73,6 +78,15 @@ class MainWindow(QMainWindow):
         # TODO do this in thread instead
         l.info(f'Setting progressbar to something')
         self.progressBar.setValue(val)
+
+    def groupImageSequences(self):
+
+        paths=sortImageSequence.combinedPaths(self.currentFiles)
+
+        self.fileslist.clear()
+        self.fileslist.addItems(paths)
+        self.number_of_files.setText(f'{len(paths)} files')
+        self.update()
 
     def fileslist_list_files(self):
         timeer = timer()
@@ -230,18 +244,6 @@ def scan_folder_disk(folder):
     l.info(f'Scan took {timer_scan_folder_disk}')
     return files_folders
 
-
-if __name__ == "__main__":
-    watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
-                 Path("Y:\Models"), Path("Y:\Footage"), Path("Y:\Other"), Path("Y:\HDRI"), Path("Y:\previews"),
-                 Path("Y:\Sound FX"), Path("Y:\Textures")]
-
-    app = QApplication(sys.argv)
-    self = MainWindow()
-    self.show()
-    sys.exit(app.exec_())
-
-
 class sortImageSequence:
     regexPattern = r'\.[0-9]{1,100}\.'
 
@@ -314,18 +316,18 @@ class sortImageSequence:
 
 """
 paths=self.currentFiles
-paths=files[0:10]
-path=paths[0]
-
-
-out=sortImageSequence.combinedPaths(paths)
-
-
-out=sortImageSequence.combinedPaths(files)
-
-a=sortImageSequence.combinedPaths(files)
-
-
-[]
 
 """
+
+if __name__ == "__main__":
+    watchlist = [Path("C:\Assets\Cykelklubben\Leaves"), Path("C:\Assets\Cykelklubben\License"),
+                 Path("Y:\Models"), Path("Y:\Footage"), Path("Y:\Other"), Path("Y:\HDRI"), Path("Y:\previews"),
+                 Path("Y:\Sound FX"), Path("Y:\Textures")]
+
+    app = QApplication(sys.argv)
+    self = MainWindow()
+    self.show()
+    sys.exit(app.exec_())
+
+
+
