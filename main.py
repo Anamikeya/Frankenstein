@@ -262,52 +262,61 @@ class sortImageSequence:
         else:
             return None
 
-
     @staticmethod
     def combinedPaths(paths: list) -> str:
         """
         Returns a string with combined framerange from the inserted list
         """
-        framelist = [sortImageSequence._getFrameNumber(x) for x in paths]
-        startframe=min([x[0] for x in framelist if x])
-        endframe=max([x[0] for x in framelist if x])
 
+        # Find all sequences
+        sequences = {
+        }
 
-        out=[]
+        for path in paths:
+            frame = sortImageSequence._getFrameNumber(path)
+            if frame:
+                delrange = frame[1].regs[0]
+                number = int(frame[1].group()[1:-1])
+                numberlength = len(str(frame[0]))
+                outstrtemp = path[:delrange[0]] + "." + ("#" * numberlength) + "." + path[delrange[1]:]
 
-        for cleanstr in paths:
+                try:
+                    # Try if list already exists
+                    sequences[outstrtemp]
+                except KeyError:
+                    sequences[outstrtemp] = {}
 
-            delrange=framelist[0][1].regs[0]
+                sequences[outstrtemp][path] = {'delrange': delrange,
+                                               'numberlength': numberlength,
+                                               'number': number}
 
-            numberlength=len(str(framelist[0][0]))
+        # Find start end sequences
+        for key, item in sequences.items():
+            frames = [x['number'] for y, x in item.items()]
+            sequences[key]["startframe"] = min(frames)
+            sequences[key]["endframe"] = max(frames)
 
+        # Add these to list:
+        for key, item in sequences.items():
 
-            outstrtemp=cleanstr[:delrange[0]]+"."+("#"*numberlength)+"."+cleanstr[delrange[1]:]
+            paths.append(key)
+            filestoremove = [x for x in item.keys() if x != "startframe" and x != 'endframe']
 
-            outstrrange = cleanstr[:delrange[0]] + "." + (str(startframe)+'-'+str(endframe)) + "." + cleanstr[delrange[1]:]
+            for file in filestoremove:
+                del paths[paths.index(file)]
 
-            out.append({'outtemp':outstrtemp,
-               'outrange':outstrrange})
+        # remove files to list
 
+        paths.sort()
 
-        #make mega dict
-        megadict={}
-
-
-        #for x in out: #TODO denna loopen som måste loopa över dict inte list
-        #    megadict[out['outtemp']]=[]
-
-
-        return megadict
-
-
+        return paths
 
 
 """
-files=self.currentFiles
-x=files[0]
-
+paths=self.currentFiles
 paths=files[0:10]
+path=paths[0]
+
 
 out=sortImageSequence.combinedPaths(paths)
 
